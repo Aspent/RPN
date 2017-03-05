@@ -24,12 +24,8 @@ namespace ReversePolishNotation
             _operations.Add('/');
             _operations.Add('(');
             _operations.Add(')');
-
-
         }
         
-         
-
         public string Translate(string sourceString)
         {
             var str = sourceString.Replace(" ", "");
@@ -65,6 +61,10 @@ namespace ReversePolishNotation
 
                     while (_priorities[stack.Peek()] <= _priorities[t])
                     {
+                        if (_priorities[stack.Peek()] == _priorities[t] && _priorities[t] == 1)
+                        {
+                            break;
+                        }
                         result.Append(stack.Pop() + " ");
                         if (stack.Count == 0)
                         {

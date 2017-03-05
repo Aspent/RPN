@@ -41,17 +41,12 @@ namespace ReversePolishNotation
             }
 
 
-            const string pattern = @"^\d+(([-+*/^]){1}\d+)+$";
+            const string pattern = @"^[-]?\d+(\.\d+)?(([-+*/^]){1}[-]?\d+(\.\d+)?)+$";
 
 
-            if (!Regex.IsMatch(str, pattern))
-            {
-                Console.WriteLine("Error: Incorrect expression");
-                return false;
-            }
-
-            return true;
-        }
-        
+            if (Regex.IsMatch(str, pattern)) return true;
+            Console.WriteLine("Error: Incorrect expression");
+            return false;
+        }   
     }
 }

@@ -22,15 +22,23 @@ namespace ReversePolishNotation
         {
             var result = new List<string>();
 
-            const string pattern = @"(^\d+)|([*/^+(-]{1}[-]?\d+)";
+            const string pattern = @"(^[-]?\d+(\.\d+)?)|([*/^+(-]{1}[-]?\d+(\.\d+)?)";
             var regex = new Regex(pattern);
             var matches = regex.Matches(sourceString);
 
             for (var i = 0; i < sourceString.Length; i++)
             {
+
                 var found = false;
                 foreach (Match t in matches)
                 {
+                    if (i == 0 && i == t.Index)
+                    {
+                        result.Add(sourceString.Substring(0, t.Length));
+                        found = true;
+                        i += t.Length - 1;
+                        break;
+                    }
                     if (i == t.Index)
                     {
                         found = true;
